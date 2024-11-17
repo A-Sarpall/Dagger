@@ -3,34 +3,17 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Fraud Detection Dashboard</title>
-    <link rel="stylesheet" href="/static/graphs.css" />
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <title>Form Submission Results</title>
   </head>
   <body>
-    <h1>Fraud Detection Graphs</h1>
+    <h1>Form Submission Results</h1>
 
-    <!-- Section for graphs hosted locally -->
-    <div class="graphs-container">
-      <h2>Generated Graphs</h2>
-      <img src="{{ url_for('get_graph', id=1) }}" alt="Graph 1" />
-      <img src="{{ url_for('get_graph', id=2) }}" alt="Graph 2" />
-      <img src="{{ url_for('get_graph', id=3) }}" alt="Graph 3" />
+    <div>
+      <h2>Submitted Data:</h2>
+      <p><strong>Client Name:</strong> {{ data.client_name }}</p>
+      <p><strong>Withdrawal Amount:</strong> {{ data.withdrawal_amount }}</p>
+      <p><strong>Time (24 hours):</strong> {{ data.time }}</p>
+      <p><strong>Distance From Home:</strong> {{ data.distance_from_home }}</p>
     </div>
-
-    <!-- Section for the external link -->
-    <div class="external-graph">
-      <h2>Additional Graphs</h2>
-      <p>The graph is hosted externally. Click the button below to view it:</p>
-      <a
-        href="https://rpubs.com/Sathvikkatta/1246398"
-        target="_blank"
-        style="text-decoration: none"
-      >
-        <button>View RPubs Graph</button>
-      </a>
-    </div>
-
-    <script src="/static/scripts.js"></script>
   </body>
 </html>

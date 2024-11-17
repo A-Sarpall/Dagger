@@ -24,74 +24,53 @@
         <p>Slice through fraud with our AI-powered detection software</p>
       </div>
 
-      <div id="file-upload">
-        <h2>Upload Your Transactions CSV</h2>
-        <form id="csv-upload-form" onsubmit="uploadFile(event)">
-          <div class="button-group">
-            <label for="csv-file" class="custom-file-upload">
-              Select CSV
-            </label>
-            <input
-              type="file"
-              id="csv-file"
-              name="file"
-              accept=".csv"
-              style="display: none"
-              onchange="showFileName()"
-              required
-            />
-            <button type="submit" class="custom-file-upload">Upload</button>
+      <!-- Wrap all the forms inside one single form -->
+      <form id="inputForm" action="/graphs" method="POST">
+        <div class="form-container">
+          <div class="form-group">
+            <label for="input1">Client Name</label>
+            <input type="text" id="input1" name="input1" required />
           </div>
-          <p id="file-name"></p>
-        </form>
-      </div>
+          <div class="form-group">
+            <label for="input2">Withdrawal Amount</label>
+            <input type="text" id="input2" name="input2" required />
+          </div>
+          <div class="form-group">
+            <label for="input3">Time (24 hours)</label>
+            <input type="text" id="input3" name="input3" required />
+          </div>
+          <div class="form-group">
+            <label for="input4">Distance From Home</label>
+            <input type="text" id="input4" name="input4" required />
+          </div>
+        </div>
+
+        <!-- Submit Button -->
+        <div id="button-container">
+          <button
+            type="submit"
+            class="custom-file-upload"
+            onclick="startSliceAnimation(event)"
+          >
+            Go to Graphs
+          </button>
+        </div>
+      </form>
     </div>
 
     <script>
-      // Display the selected file name
-      function showFileName() {
-        const fileInput = document.getElementById("csv-file");
-        const fileName = document.getElementById("file-name");
-        if (fileInput.files.length > 0) {
-          fileName.textContent = `Selected File: ${fileInput.files[0].name}`;
-        } else {
-          fileName.textContent = "";
-        }
-      }
-
-      // Prevent form submission and handle file upload manually
-      function uploadFile(event) {
-        event.preventDefault(); // Prevent the default form submission
+      // Start the slice animation and transition to the next page
+      function startSliceAnimation(event) {
+        event.preventDefault(); // Prevent the form from submitting immediately
 
         // Start the slice animation
-        startSliceAnimation();
-
-        // Simulate file upload with a delay
-        fetch("/upload", {
-          method: "POST",
-          body: new FormData(event.target), // Send the form data
-        })
-          .then((response) => response.json())
-          .then((data) => {
-            console.log(data.message); // File upload simulated successfully
-            // Proceed to graph.html after upload is complete
-          })
-          .catch((error) => {
-            console.error("Error:", error);
-          });
-      }
-
-      // Start the slice animation and transition to the next page
-      function startSliceAnimation() {
         const overlay = document.getElementById("slice-overlay");
-
-        // Activate the slice animation
         overlay.classList.add("active");
 
-        // Delay page transition until after animation completes (0.8s)
+        // Submit the form after the animation completes (0.8s)
         setTimeout(() => {
-          window.location.href = "/graphs"; // Redirect to /graphs to use Flask's route
-        }, 800); // Ensure this matches the animation duration
+          document.getElementById("inputForm").submit(); // Submit the form after animation
+        }, 800); // Match this delay with animation duration
       }
     </script>
   </body>
