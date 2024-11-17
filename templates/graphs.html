@@ -3,17 +3,33 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Form Submission Results</title>
+    <title>Graphs</title>
+    <style>
+      /* Container for the images */
+      .image-container {
+        display: flex; /* Aligns images horizontally */
+        justify-content: space-between; /* Ensures there's space between images */
+        width: 100%; /* Make container take up full width */
+        max-width: 100%; /* Prevent images from overflowing */
+      }
+
+      /* Styles for each image */
+      .image-container img {
+        width: 33%; /* Make each image take up one third of the container */
+        height: auto; /* Maintain aspect ratio */
+        object-fit: contain; /* Ensure images maintain their aspect ratio */
+        margin: 5px; /* Adds space between images */
+      }
+    </style>
   </head>
   <body>
-    <h1>Form Submission Results</h1>
+    <h1>Graphs</h1>
 
-    <div>
-      <h2>Submitted Data:</h2>
-      <p><strong>Client Name:</strong> {{ data.client_name }}</p>
-      <p><strong>Withdrawal Amount:</strong> {{ data.withdrawal_amount }}</p>
-      <p><strong>Time (24 hours):</strong> {{ data.time }}</p>
-      <p><strong>Distance From Home:</strong> {{ data.distance_from_home }}</p>
+    <!-- Container for images -->
+    <div class="image-container">
+      {% for image in images %}
+      <img src="{{ url_for('static', filename=image) }}" alt="Graph" />
+      {% endfor %}
     </div>
   </body>
 </html>
