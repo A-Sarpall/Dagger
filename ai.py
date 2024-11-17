@@ -657,4 +657,13 @@ def creatingDataGraphs(name,amount,time,distance):
 
      return output_path,output_path2,output_path3,cleaned_value
 
+print(creatingDataGraphs('Tom Cruise',333,22,33))
+print(creatingDataGraphs('Sam Sulek',333,22,33))
+print(creatingDataGraphs('Jake Paul',333,22,33))
 print(creatingDataGraphs('Srikar Bond',333,22,33))
+print(creatingDataGraphs('Bijan Robinson',333,22,33))
+
+
+
+
+
