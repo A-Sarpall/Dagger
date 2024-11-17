@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fraud Detection Dashboard</title>
+    <link rel="stylesheet" href="/static/graphs.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
+  <body>
+    <h1>Fraud Detection Graphs</h1>
+
+    <!-- Section for graphs hosted locally -->
+    <div class="graphs-container">
+      <h2>Generated Graphs</h2>
+      <img src="{{ url_for('get_graph', id=1) }}" alt="Graph 1" />
+      <img src="{{ url_for('get_graph', id=2) }}" alt="Graph 2" />
+      <img src="{{ url_for('get_graph', id=3) }}" alt="Graph 3" />
+    </div>
+
+    <!-- Section for the external link -->
+    <div class="external-graph">
+      <h2>Additional Graphs</h2>
+      <p>The graph is hosted externally. Click the button below to view it:</p>
+      <a
+        href="https://rpubs.com/Sathvikkatta/1246398"
+        target="_blank"
+        style="text-decoration: none"
+      >
+        <button>View RPubs Graph</button>
+      </a>
+    </div>
+
+    <script src="/static/scripts.js"></script>
+  </body>
+</html>

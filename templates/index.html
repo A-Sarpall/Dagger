@@ -3,41 +3,96 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Fraud Detection Dashboard</title>
+    <title>Dagger | Home</title>
     <link rel="stylesheet" href="/static/style.css" />
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   </head>
-  <body>
+  <body
+    style="
+      background-image: url('/static/images/picture.webp');
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      rgba
+    "
+  >
+    <div class="slice-overlay" id="slice-overlay"></div>
+
     <div class="container">
-      <!-- Logo and Tagline -->
       <div id="header">
-        <h1>FraudDetect AI</h1>
-        <p>Your partner in fraud prevention</p>
+        <h1>DAGGER</h1>
+        <p>Slice through fraud with our AI-powered detection software</p>
       </div>
 
-      <!-- Generative AI Explanation -->
-      <div id="explanation">
-        <h2>How We Detect Fraud</h2>
-        <p>
-          Fraud detection combines advanced statistical modeling and AI to
-          highlight irregular transactions that deviate from normal patterns.
-        </p>
-      </div>
-
-      <!-- File Input -->
       <div id="file-upload">
         <h2>Upload Your Transactions CSV</h2>
-        <input type="file" id="csv-file" accept=".csv" />
-        <button onclick="uploadFile()">Upload</button>
-      </div>
-
-      <!-- Graphs -->
-      <div id="graphs">
-        <canvas id="graph1"></canvas>
-        <canvas id="graph2"></canvas>
-        <canvas id="graph3"></canvas>
+        <form id="csv-upload-form" onsubmit="uploadFile(event)">
+          <div class="button-group">
+            <label for="csv-file" class="custom-file-upload">
+              Select CSV
+            </label>
+            <input
+              type="file"
+              id="csv-file"
+              name="file"
+              accept=".csv"
+              style="display: none"
+              onchange="showFileName()"
+              required
+            />
+            <button type="submit" class="custom-file-upload">Upload</button>
+          </div>
+          <p id="file-name"></p>
+        </form>
       </div>
     </div>
-    <script src="/static/scripts.js"></script>
+
+    <script>
+      // Display the selected file name
+      function showFileName() {
+        const fileInput = document.getElementById("csv-file");
+        const fileName = document.getElementById("file-name");
+        if (fileInput.files.length > 0) {
+          fileName.textContent = `Selected File: ${fileInput.files[0].name}`;
+        } else {
+          fileName.textContent = "";
+        }
+      }
+
+      // Prevent form submission and handle file upload manually
+      function uploadFile(event) {
+        event.preventDefault(); // Prevent the default form submission
+
+        // Start the slice animation
+        startSliceAnimation();
+
+        // Simulate file upload with a delay
+        fetch("/upload", {
+          method: "POST",
+          body: new FormData(event.target), // Send the form data
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            console.log(data.message); // File upload simulated successfully
+            // Proceed to graph.html after upload is complete
+          })
+          .catch((error) => {
+            console.error("Error:", error);
+          });
+      }
+
+      // Start the slice animation and transition to the next page
+      function startSliceAnimation() {
+        const overlay = document.getElementById("slice-overlay");
+
+        // Activate the slice animation
+        overlay.classList.add("active");
+
+        // Delay page transition until after animation completes (0.8s)
+        setTimeout(() => {
+          window.location.href = "/graphs"; // Redirect to /graphs to use Flask's route
+        }, 800); // Ensure this matches the animation duration
+      }
+    </script>
   </body>
 </html>

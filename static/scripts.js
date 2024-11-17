@@ -1,78 +1,44 @@
-function uploadFile() {
+// Display the selected file name
+function showFileName() {
   const fileInput = document.getElementById("csv-file");
-  const file = fileInput.files[0];
-
-  if (!file) {
-    alert("Please select a file!");
-    return;
+  const fileName = document.getElementById("file-name");
+  if (fileInput.files.length > 0) {
+    fileName.textContent = `Selected File: ${fileInput.files[0].name}`;
+  } else {
+    fileName.textContent = "";
   }
+}
 
-  const formData = new FormData();
-  formData.append("file", file);
+// Start the slice animation and transition to the next page
+function uploadFile(event) {
+  event.preventDefault(); // Prevent the form from submitting
 
+  // Start the slice animation
+  startSliceAnimation();
+
+  // Simulate upload success
   fetch("/upload", {
     method: "POST",
-    body: formData,
+    body: new FormData(event.target), // Send the form data
   })
     .then((response) => response.json())
     .then((data) => {
-      if (data.error) {
-        alert(data.error);
-      } else {
-        alert("File uploaded successfully!");
-        renderGraphs(data.stats);
-      }
+      console.log(data.message); // File upload successful
+      // You can add more logic here to handle the data if needed
     })
-    .catch((error) => console.error("Error:", error));
+    .catch((error) => {
+      console.error("Error:", error);
+    });
 }
 
-function renderGraphs(stats) {
-  const graph1 = document.getElementById("graph1").getContext("2d");
-  const graph2 = document.getElementById("graph2").getContext("2d");
-  const graph3 = document.getElementById("graph3").getContext("2d");
+function startSliceAnimation() {
+  const overlay = document.getElementById("slice-overlay");
 
-  // Example Graph 1: Fraud Alerts
-  new Chart(graph1, {
-    type: "bar",
-    data: {
-      labels: ["Total Transactions", "Potential Fraud"],
-      datasets: [
-        {
-          label: "Counts",
-          data: [stats.total_transactions, stats.potential_fraud],
-          backgroundColor: ["#0073e6", "#ff5733"],
-        },
-      ],
-    },
-  });
+  // Activate the slice animation
+  overlay.classList.add("active");
 
-  // Example Graph 2: Average Transaction Amount
-  new Chart(graph2, {
-    type: "pie",
-    data: {
-      labels: ["Average Amount"],
-      datasets: [
-        {
-          label: "Amount",
-          data: [stats.average_amount],
-          backgroundColor: ["#28a745"],
-        },
-      ],
-    },
-  });
-
-  // Example Graph 3: Dummy Data
-  new Chart(graph3, {
-    type: "line",
-    data: {
-      labels: ["1", "2", "3", "4", "5"],
-      datasets: [
-        {
-          label: "Dummy Data",
-          data: [10, 20, 30, 40, 50],
-          borderColor: "#ffc107",
-        },
-      ],
-    },
-  });
+  // Delay page transition until after animation completes (0.8s)
+  setTimeout(() => {
+    window.location.href = "graphs.html"; // Navigate to the next page after animation
+  }, 800); // Ensure this matches the animation duration
 }

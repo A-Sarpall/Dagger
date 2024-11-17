@@ -1,34 +1,85 @@
 body {
     font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f4f4f4;
+    background-color: #444E57;
     color: #333;
 }
 
 .container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 20px;
+}
+
+p{
+    font-size: 45px;
 }
 
 #header {
     text-align: center;
-    padding: 20px;
-    background-color: #0073e6;
+    font-size: 80px;
     color: white;
 }
 
-#explanation, #file-upload, #graphs {
-    margin-top: 20px;
-    padding: 20px;
-    background-color: white;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+h2 {
+    color: white;
+    text-align: center;
 }
 
-#graphs canvas {
-    width: 100%;
-    height: 300px;
-    margin-bottom: 20px;
+#file-upload {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
+
+/* Adjust the button-group alignment */
+.button-group {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    align-items: center; /* Ensures proper vertical alignment */
+}
+
+.custom-file-upload {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: white;
+    background-color: #f17710;
+    border: 2px solid #094a89;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.custom-file-upload:hover {
+    background-color: #094a89;
+    border-color: #003f7f;
+}
+
+/* Style for the "Selected File" text */
+#file-name {
+    color: white;
+    font-style: italic;
+    margin-top: 10px;
+    text-align: center;
+    font-size: 14px; /* Adjust this size as needed */
+    white-space: nowrap; /* Prevent the text from wrapping */
+    overflow: hidden; /* Hide overflow if text is too long */
+    text-overflow: ellipsis; /* Add ellipsis for long file names */
+}
+
+.slice-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #f17710;
+    z-index: 9999;
+    transform: translateX(-100%); /* Initially hidden */
+    transition: transform 0.8s ease-in-out;
+}
+
+/* Animate to fill screen */
+.slice-overlay.active {
+    transform: translateX(0);
+}
+
