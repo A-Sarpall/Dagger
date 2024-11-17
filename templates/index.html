@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fraud Detection Dashboard</title>
+    <link rel="stylesheet" href="/static/style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <!-- Logo and Tagline -->
+      <div id="header">
+        <h1>FraudDetect AI</h1>
+        <p>Your partner in fraud prevention</p>
+      </div>
+
+      <!-- Generative AI Explanation -->
+      <div id="explanation">
+        <h2>How We Detect Fraud</h2>
+        <p>
+          Fraud detection combines advanced statistical modeling and AI to
+          highlight irregular transactions that deviate from normal patterns.
+        </p>
+      </div>
+
+      <!-- File Input -->
+      <div id="file-upload">
+        <h2>Upload Your Transactions CSV</h2>
+        <input type="file" id="csv-file" accept=".csv" />
+        <button onclick="uploadFile()">Upload</button>
+      </div>
+
+      <!-- Graphs -->
+      <div id="graphs">
+        <canvas id="graph1"></canvas>
+        <canvas id="graph2"></canvas>
+        <canvas id="graph3"></canvas>
+      </div>
+    </div>
+    <script src="/static/scripts.js"></script>
+  </body>
+</html>
